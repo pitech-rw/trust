@@ -1,0 +1,22 @@
+version: '3'
+services:
+  frontend:
+    build: ./trust-fn
+    ports:
+      - "3003:6066"
+    depends_on:
+      - backend
+  
+  backend:
+    build: ./trust-bn
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+
+  database:
+    image: mongo:latest
+    environment:
+      - database=trust
+    ports:
+      - "27016:27017"
