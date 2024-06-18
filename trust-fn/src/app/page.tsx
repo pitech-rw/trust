@@ -1,30 +1,21 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import Nav from "./ui/top navbar/nav";
+import HeroSection from "./ui/hero/hero";
+import ServicesOverview from "./ui/servicesOverview/servicesOverview";
+import HowItWorks from "./ui/How it works/howitworks";
+import CallToAction from "./ui/cta/cta";
+import Footer from "./ui/footer/footer";
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-      </div>
-
-      <div className={styles.center}>
-        <h1>Trust</h1>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="#"
-          className={styles.card}
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Get certified taskers <span>-&gt;</span>
-          </h2>
-          <p>
-            Request for a service provider and get unmatched experience
-          </p>
-        </a>
-      </div>
+      <Nav />
+      <HeroSection />
+      <ServicesOverview />
+      <HowItWorks />
+      <CallToAction />
+      <Footer />
     </main>
   );
 }

@@ -1,0 +1,56 @@
+.hero {
+  background-image: url('/path/to/your/background-image.jpg'); /* Add the path to your background image */
+  background-size: cover;
+  background-position: center;
+  padding: 100px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white; /* Ensure text color contrasts well with the background image */
+  text-align: center;
+}
+
+.heroContent {
+  max-width: 800px;
+}
+
+.headline {
+  font-size: 36px;
+  color: #15616D;
+  margin-bottom: 20px;
+}
+
+.subheadline {
+  font-size: 24px;
+  color: #333333; /* Dark gray text color */
+  margin-bottom: 40px;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchInput {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #4A90E2; /* Primary color */
+  border-radius: 5px 0 0 5px;
+}
+
+.searchButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #15616D;
+  color: white;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.searchButton:hover {
+  background-color: #FF6F61; /* Secondary color */
+}
