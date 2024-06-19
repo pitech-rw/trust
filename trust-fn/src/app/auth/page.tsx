@@ -18,7 +18,7 @@ const AuthPage: React.FC = () => {
   };
 
   return (
-    <div>
+    <main>
       <Nav />
       <div className={styles.loginContainer}>
         <h2>Login</h2>
@@ -49,7 +49,7 @@ const AuthPage: React.FC = () => {
         </form>
       </div>
       <Footer />
-    </div>
+    </main>
   );
 };
 

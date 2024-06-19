@@ -9,7 +9,7 @@ import Footer from "./ui/footer/footer";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <main>
       <Nav />
       <HeroSection />
       <ServicesOverview />

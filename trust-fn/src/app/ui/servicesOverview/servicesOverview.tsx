@@ -9,14 +9,14 @@ const services = [
 const ServicesOverview = () => {
   return (
     <div className={styles.servicesSection}>
-      <h2 className={styles.title}>Available Services</h2>
+      <h2 className={styles.title}>Popular Services</h2>
       <div className={styles.servicesContainer}>
         {services.map(service => (
           <div key={service.id} className={styles.serviceCard}>
             <div className={styles.icon}>{service.icon}</div>
             <h3 className={styles.serviceName}>{service.name}</h3>
             <p className={styles.serviceDescription}>{service.description}</p>
-            <a href="#" className={styles.learnMore}>Learn More</a>
+            <a href="#" className={styles.learnMore}>Request</a>
           </div>
         ))}
       </div>

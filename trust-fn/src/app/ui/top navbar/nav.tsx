@@ -3,8 +3,8 @@ import Link from 'next/link'
 
 const Nav = () => {
     const navItems = {
-        "/#": "How It Works",
-        '/': "Services",
+        '/#': "Services",
+        "/#hiw": "How It Works",
         '/auth': "Join"
     }
     return (
