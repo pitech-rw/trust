@@ -1,7 +1,4 @@
 .hero {
-  background-image: url('/path/to/your/background-image.jpg'); /* Add the path to your background image */
-  background-size: cover;
-  background-position: center;
   padding: 100px 20px;
   display: flex;
   justify-content: center;
@@ -29,14 +26,14 @@
 .searchBar {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
 }
 
 .searchInput {
   width: 300px;
   padding: 10px;
   font-size: 16px;
-  border: 2px solid #4A90E2; /* Primary color */
+  border: 2px solid #15616d;
   border-radius: 5px 0 0 5px;
 }
 
