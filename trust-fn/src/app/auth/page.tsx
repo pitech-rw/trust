@@ -1,31 +1,56 @@
 'use client'
-import { useState } from 'react'
-const AuthPage = () => {
-    const [theme, setTheme] = useState(0);
+import { useState } from 'react';
+import styles from './signin.module.css';
+import Nav from '../ui/top navbar/nav';
+import Footer from '../ui/footer/footer';
 
-    const changeTheme = () => {
-    setTheme(1) 
-    }
-    const navItems = ['Mounting', 'Delivery', 'Home chores', 'Handyman', 'Electric']
-    return (
-        <main>
-            <div>
-                <div>
-                    <h1>Trust</h1>
-                    <span>Explore</span>
-                    <ul>
-                        {
-                            navItems.map((item) => (
-                                <li key={item}>{item}</li>
-                            ))
-                        }
-                    </ul>
-                </div>
-            </div>
-            <button onClick={changeTheme}>Prefer dark mode {theme}</button>
-        </main>
-    )
-}
+const AuthPage: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // Add your login logic here, such as calling an authentication API
+    console.log('Login submitted with:', { email, password });
+    // Reset form fields after submission
+    setEmail('');
+    setPassword('');
+  };
+
+  return (
+    <main>
+      <Nav />
+      <div className={styles.loginContainer}>
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div className={styles.formGroup}>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className={styles.submitButton}>
+            Login
+          </button>
+        </form>
+      </div>
+      <Footer />
+    </main>
+  );
+};
 
 export default AuthPage

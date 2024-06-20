@@ -38,6 +38,14 @@ body {
 body {
   background: var(--background-color);
 }
+main {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  min-height: 100vh;
+}
 
 a {
   color: inherit;
