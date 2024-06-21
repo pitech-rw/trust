@@ -78,3 +78,10 @@
 .contactInfo p {
   margin: 5px 0;
 }
+
+@media (max-width: 768px) {
+  .footerContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+}

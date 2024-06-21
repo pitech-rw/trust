@@ -34,7 +34,7 @@ const Footer = () => {
           <h4>Contact Us</h4>
           <p>1 KN 78 St <br />Kigali, Rwanda </p>
           <p>Email: <a href="mailto:info@trust.rw">info@trust.rw</a></p>
-          <p>Phone: <a href="tel:+250788231926">(250) 788-231926</a></p>
+          <p>Phone: <a href="tel:+250787799082">(250) 787-799082</a></p>
         </div>
       </div>
     </footer>
