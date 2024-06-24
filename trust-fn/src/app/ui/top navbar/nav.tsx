@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import styles from './nav.module.css'
 import Link from 'next/link'
 
@@ -14,6 +14,14 @@ const Nav = () => {
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!mobileMenuOpen)
     }
+    useEffect(() => {
+        const navListElt = document.querySelector('ul')
+
+        if (mobileMenuOpen) {
+            navListElt?.classList.remove(styles.navList)
+            navListElt?.classList.add(styles.navListMobile)
+        }
+    }, [mobileMenuOpen])
     return (
         <div className={styles.navigation}>
             <div className={styles.nav_left}>
