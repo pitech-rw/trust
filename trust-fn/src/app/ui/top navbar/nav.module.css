@@ -42,29 +42,26 @@
     gap: 20px;
     list-style-type: none;
 }
-.navListMobile {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 60px;
-  right: 20px;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  border-radius: 8px;
-  z-index: 1000;
-}
 
-.navListMobile li {
-  margin-left: 0;
-  margin-bottom: 10px;
-}
 
 /* Media Queries */
 @media (max-width: 768px) {
-  .navList {
-    display: none;
-  }
+    .navList {
+        display: none;
+    }
+    .navListMobile {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 1000;
+    }
 
   .mobileMenuButton {
     display: block;
