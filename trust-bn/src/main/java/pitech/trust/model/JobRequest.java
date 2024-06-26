@@ -20,6 +20,9 @@ public class JobRequest {
     private String jobLocation;
     private Long price;
     private Timestamp requestTime;
+    private Timestamp updatedAt;
+    private Timestamp completedAt;
     private String requestStatus;
+    private String feedback;
 
 }

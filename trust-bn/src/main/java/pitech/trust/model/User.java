@@ -2,6 +2,9 @@ package pitech.trust.model;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,10 +20,12 @@ public class User {
     private String email;
     private String phoneNumber;
     private String location;
-    private String role;
-    private String status;
+    private String type; // ADMIN, CLIENT
+    private ArrayList<String> roles; // 
+    private String status; // active, locked, suspended
     private String username;
     private String password;
+    private Integer trust;
 
 
 
