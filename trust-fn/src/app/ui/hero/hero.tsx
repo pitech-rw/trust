@@ -1,6 +1,15 @@
+'use client'
 import styles from './hero.module.css'
+import { useRouter } from 'next/router'
 
 const HeroSection = () => {
+    const router = useRouter()
+    const instantSearch = (e: React.FormEvent<HTMLFormElement>) => {
+        router.push({
+            pathname: '/ui/search'
+        })
+
+    }
     return (
         <div className={styles.hero}>
             <div className={styles.heroContent}>
@@ -10,14 +19,16 @@ const HeroSection = () => {
                 <h4 className={styles.subheadline}>
                 Request for a home service provider and get unmatched experience
                 </h4>
-                <div className={styles.searchBar}>
-                <input
-                    type="text"
-                    placeholder="What do you need help with?"
-                    className={styles.searchInput}
-                />
-                <button className={styles.searchButton}>Search</button>
-                </div>
+                <form onSubmit={instantSearch}>
+                    <div className={styles.searchBar}>
+                        <input
+                            type="text"
+                            placeholder="What do you need help with?"
+                            className={styles.searchInput}
+                        />
+                        <button className={styles.searchButton} type='submit'>Search</button>
+                    </div>
+                </form>
             </div>
         </div>
     )
