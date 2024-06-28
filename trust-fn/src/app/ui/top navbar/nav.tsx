@@ -34,7 +34,7 @@ const Nav = () => {
                 <ul className={`${styles.navList} ${mobileMenuOpen? styles.navListMobile : ''}`}>
                     {
                         Object.entries(navItems).map(([key_, value]) => (
-                            <Link href={key_}><li key={key_}>{value}</li></Link>
+                            <li key={key_}><Link href={key_}> {value}</Link></li>
                         ))
                     }
                 </ul>
