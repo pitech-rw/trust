@@ -1,13 +1,13 @@
 'use client'
 import styles from './hero.module.css'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 const HeroSection = () => {
     const router = useRouter()
     const instantSearch = (e: React.FormEvent<HTMLFormElement>) => {
-        router.push({
-            pathname: '/ui/search'
-        })
+        router.push(
+            '/ui/search'
+        )
 
     }
     return (

@@ -9,7 +9,8 @@ const Nav = () => {
     const navItems = {
         '/#': "Services",
         "/#hiw": "How It Works",
-        '/auth': "Join"
+        '/auth': "Join",
+        '/lang': "Hindura ururimi"
     }
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!mobileMenuOpen)
