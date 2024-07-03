@@ -30,7 +30,7 @@ public class JobService {
         return jobRepository.save(request);
     }
 
-    public void deleterJobById(String id) {
+    public void deleteJobById(String id) {
         jobRepository.deleteById(id);
     }
 }
