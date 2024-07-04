@@ -1,6 +1,5 @@
 spring:
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      database: testdb
+      uri: "mongodb+srv://trust.uwoadm1.mongodb.net/trust?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority&appName=trust&tls=true"
+      tlsCertificateKeyFile: "C:/Users/ingen/OneDrive/Desktop/trust/trust-bn/X509-cert-763024442637273702.pem"
