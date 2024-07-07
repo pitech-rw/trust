@@ -1,14 +1,15 @@
 'use client'
 import styles from './hero.module.css'
-import { useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
+import { useState } from 'react'
 
 const HeroSection = () => {
-    const router = useRouter()
-    const instantSearch = (e: React.FormEvent<HTMLFormElement>) => {
-        router.push(
-            '/ui/search'
-        )
+    const [isSearchListVisible, setIsSearchListVisible] = useState(false)
+    const userSearch = useSearchParams()
 
+    const instantSearch = (e: string) => {
+        const params = new URLSearchParams(userSearch)
+        setIsSearchListVisible(e.length > 0)
     }
     return (
         <div className={styles.hero}>
@@ -19,16 +20,25 @@ const HeroSection = () => {
                 <h4 className={styles.subheadline}>
                 Request for a home service provider and get unmatched experience
                 </h4>
-                <form onSubmit={instantSearch}>
-                    <div className={styles.searchBar}>
-                        <input
-                            type="text"
-                            placeholder="What do you need help with?"
-                            className={styles.searchInput}
-                        />
-                        <button className={styles.searchButton} type='submit'>Search</button>
-                    </div>
-                </form>
+                <div className={styles.searchBar}>
+                    <input
+                        type="text"
+                        placeholder="What do you need help with?"
+                        className={styles.searchInput}
+                        onChange={(e) => {instantSearch(e.target.value)}}
+                    />
+                    <button className={styles.searchButton} type='submit'>Search</button>
+                    {
+                        isSearchListVisible && (
+                            <div className={styles.searchList}>
+                                <ol>
+                                    <li>Search result</li>
+                                </ol>
+                            </div>
+                        )
+                    }
+                </div>
+                
             </div>
         </div>
     )
