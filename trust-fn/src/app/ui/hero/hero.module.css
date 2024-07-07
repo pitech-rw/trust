@@ -27,14 +27,18 @@
   display: flex;
   justify-content: center;
   align-items: stretch;
+  position:relative;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .searchInput {
-  width: 300px;
+  width: 100%;
   padding: 10px;
   font-size: 16px;
   border: 2px solid #15616d;
   border-radius: 5px 0 0 5px;
+  flex: 1;
 }
 
 .searchButton {
@@ -50,4 +54,29 @@
 
 .searchButton:hover {
   background-color: #FF6F61; /* Secondary color */
+}
+
+.searchList {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  right: 0;
+  transform: translateX(-50%);
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  margin-top: 5px;
+  text-align: left;
+  z-index: 59;
+}
+
+.searchList p {
+  margin: 0;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.searchList p:last-child {
+  border-bottom: none;
 }

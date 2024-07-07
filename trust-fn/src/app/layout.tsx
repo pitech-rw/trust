@@ -5,7 +5,10 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Trust - find trusted home service workers",
+  title: {
+    default:  "Trust - find trusted home service workers",
+    template: "Trust - %s"
+  },
   description: "trusted workers online ",
 };
 
