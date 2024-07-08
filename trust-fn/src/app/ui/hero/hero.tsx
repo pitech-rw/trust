@@ -32,7 +32,9 @@ const HeroSection = () => {
                         isSearchListVisible && (
                             <div className={styles.searchList}>
                                 <ol>
-                                    <li>Search result</li>
+                                    <li>Search results... </li>
+                                    <li>Search results... </li>
+                                    <li>Search results... </li>
                                 </ol>
                             </div>
                         )
