@@ -11,12 +11,18 @@ const Nav = () => {
         '/#': "Services",
         "/#hiw": "How It Works",
         '/auth': "Join",
-        '/lang': "Hindura ururimi"
+        '/lang': "Ururimi"
     }
 
     const services = [
-        {path: '/services/cleaning', label: 'Cleaning services'},
-        {path: '/services/gardening', label: 'Gardening services'}
+        {path: '/services/cleaning', label: 'Cleaning'},
+        {path: '/services/gardening', label: 'Gardening'}
+    ]
+
+    const languages = [
+        {path: '/en', label: 'English'},
+        {path: '/fr', label: 'Francais'},
+        {path: '/kin', label: 'Kinyarwanda'}
     ]
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!mobileMenuOpen)
@@ -44,26 +50,27 @@ const Nav = () => {
                             <li
                               key={path}
                               onMouseEnter={() => setHoveredItem(label)}
-                              onMouseLeave={() => setHoveredItem(label)}
-                            ><Link href={path}> {label}</Link></li>
+                              onMouseLeave={() => setHoveredItem(null)}
+                            ><Link href={path}> {label}</Link>
                             {label === 'Services' && hoveredItem === 'Services' && (
                                 <ul className={styles.dropdownMenu}>
-                                    {serviceMenuItems.map((item) => (
+                                    {services.map((item) => (
                                         <li key={item.path}>
                                             <Link href={item.path}>{item.label}</Link>
                                         </li>
                                     ))}
                                 </ul>
                             )}
-                            {label === 'How It Works' && hoveredItem === 'How It Works' && (
+                            {label === 'Ururimi' && hoveredItem === 'Ururimi' && (
                                 <ul className={styles.dropdownMenu}>
-                                    {howItWorksMenuItems.map((item) => (
+                                    {languages.map((item) => (
                                         <li key={item.path}>
                                             <Link href={item.path}>{item.label}</Link>
                                         </li>
                                     ))}
                                 </ul>
                             )}
+                            </li>
                         ))
                     }
                 </ul>
