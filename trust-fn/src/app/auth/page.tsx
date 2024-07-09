@@ -4,6 +4,7 @@ import styles from './signin.module.css';
 import Nav from '../ui/top navbar/nav';
 import Footer from '../ui/footer/footer';
 import StyledLink from '../ui/shared/Link/StyledLink';
+import { fetchData } from '../utils/server';
 
 const AuthPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -14,7 +15,7 @@ const AuthPage: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Add your login logic here, such as calling an authentication API
+    fetchData('/users')
     console.log('Login submitted with:', { email, password });
     // Reset form fields after submission
     setEmail('');
