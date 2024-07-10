@@ -1,10 +1,10 @@
 'use client'
 import { useState } from 'react';
 import styles from './signin.module.css';
-import Nav from '../ui/top navbar/nav';
-import Footer from '../ui/footer/footer';
-import StyledLink from '../ui/shared/Link/StyledLink';
-import { fetchData } from '../utils/server';
+import Nav from '../../ui/top navbar/nav';
+import Footer from '../../ui/footer/footer';
+import StyledLink from '../../ui/shared/Link/StyledLink';
+import { fetchData } from '../../utils/server';
 
 const AuthPage: React.FC = () => {
   const [email, setEmail] = useState('');
