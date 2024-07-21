@@ -1,9 +1,11 @@
 'use client'
 import { useState } from 'react';
+import { useFormState, useFormStatus } from 'react-dom';
 import styles from './signin.module.css';
-import Nav from '../ui/top navbar/nav';
-import Footer from '../ui/footer/footer';
-import StyledLink from '../ui/shared/Link/StyledLink';
+import Nav from '@/app/ui/top navbar/nav'
+import Footer from '@/app/ui/footer/footer'
+import StyledLink from '@/app/ui/shared/Link/StyledLink';
+import { auth } from '@/app/utils/server';
 
 const AuthPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -11,10 +13,10 @@ const AuthPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [isRegister, setIsRegister] = useState(false)
   const [ staySignedIn, setStaySignedIn] =useState(false)
+  const [errorMsg, dispatch] = useFormState(auth, undefined)
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Add your login logic here, such as calling an authentication API
     console.log('Login submitted with:', { email, password });
     // Reset form fields after submission
     setEmail('');
@@ -54,7 +56,7 @@ const AuthPage: React.FC = () => {
                   type="tel"
                   id="phone"
                   value={phone}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setPhone(e.target.value)}
                   required
                 />
               </div>
