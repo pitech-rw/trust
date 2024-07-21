@@ -21,7 +21,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-//                               .requestMatchers("/", "/auth", "/error").permitAll()
+                              .requestMatchers("/api/v1/signin/google").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .oauth2Login(withDefaults())
@@ -34,16 +34,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public CorsFilter cFilter () {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
-    }
+    
 }
 

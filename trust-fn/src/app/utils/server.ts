@@ -1,7 +1,10 @@
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 export const auth = async (endpoint: string, body: Record<"username" | "password", string> | undefined) => {
     try {
-        const response = await fetch(`${process.env.SERVER}${endpoint}`, 
+        const response = await fetch(`http://localhost:8080/api/v1${endpoint}`, 
             {
                 method: 'POST',
                 body: JSON.stringify(body),
@@ -14,7 +17,7 @@ export const auth = async (endpoint: string, body: Record<"username" | "password
         return response.json();
     } catch (error) {
         const userMessage = {
-            message:'There was a problem contacting the server' 
+            message:'something went wrong' 
         }
         console.error( error)
         return JSON.stringify(userMessage)
