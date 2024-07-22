@@ -24,7 +24,7 @@ const AuthPage: React.FC = () => {
   };
 
   const handleGoogleLogin = () => {
-    auth('/signin/google', undefined)
+    auth('login/oauth2/code/google', undefined)
   }
 
   const toggleForm = () => {

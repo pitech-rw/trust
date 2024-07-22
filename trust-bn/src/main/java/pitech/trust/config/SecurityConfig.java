@@ -21,7 +21,6 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                              .requestMatchers("/api/v1/signin/google").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .oauth2Login(withDefaults())
