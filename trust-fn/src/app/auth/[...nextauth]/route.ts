@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import GoogleProvider from 'next-auth/providers/google'
 import { auth } from '../../../app/utils/server'
 
 
@@ -17,14 +18,19 @@ import { auth } from '../../../app/utils/server'
                 if (res.ok && user ) return user
                 return null
             },
+        }),
+        GoogleProvider({
+            clientId:'1011553561920-mjpvsiia5dcqc0hqoub4phlsmmuvhbrh.apps.googleusercontent.com',
+            clientSecret: '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',
+            callbacks: {
+                async signIn({account, profile}) {
+                    if
+                }
+            }
         })
     ]
-    const pages = {
-        signIn: '/auth'
-    }
 const handler = NextAuth({
     providers,
-    pages
 })
 
 export { handler as GET, handler as POST}
