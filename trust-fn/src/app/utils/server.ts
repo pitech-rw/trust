@@ -1,8 +1,9 @@
 import dotenv from 'dotenv'
+import { CredentialInput } from 'next-auth/providers/credentials';
 
 dotenv.config()
 
-export const auth = async (endpoint: string, body: Record<"username" | "password", string> | undefined) => {
+export const auth = async (endpoint: string, body: string) => {
     try {
         const response = await fetch(`http://localhost:8080/${endpoint}`, 
             {
