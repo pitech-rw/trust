@@ -7,8 +7,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
@@ -18,17 +16,13 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-//                               .requestMatchers("/", "/auth", "/error").permitAll()
-                                .anyRequest().authenticated()
-                )
-                .oauth2Login(withDefaults())
-                .logout(logout ->
-                        logout
-                                .logoutSuccessUrl("/auth/logout").permitAll()
+                                .anyRequest().permitAll()
                 )
                 .csrf(AbstractHttpConfigurer::disable); // Use this method to disable CSRF
 
         return http.build();
     }
+
+
 }
 
