@@ -57,7 +57,7 @@ const AuthPage: React.FC = () => {
               <div className={styles.formGroup}>
                 <label htmlFor="telephone">Phone number</label>
                 <input
-                  type="tel"
+                  type="telephone"
                   id="phone"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}

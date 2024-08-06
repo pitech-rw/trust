@@ -47,6 +47,9 @@ const handler = NextAuth({
             const user = res.json()
             if (res.ok && user ) return user
         }
+    },
+    pages: {
+        newUser: 'auth/signup'
     }
 })
 
