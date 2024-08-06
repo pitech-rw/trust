@@ -10,8 +10,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
@@ -21,18 +19,12 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .anyRequest().authenticated()
-                )
-                .oauth2Login(withDefaults())
-                .logout(logout ->
-                        logout
-                                .logoutSuccessUrl("/auth/logout").permitAll()
+                                .anyRequest().permitAll()
                 )
                 .csrf(AbstractHttpConfigurer::disable); // Use this method to disable CSRF
 
         return http.build();
     }
 
-    
 }
 
