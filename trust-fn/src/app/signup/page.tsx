@@ -7,9 +7,13 @@ import { z } from 'zod'
 import { auth } from '../utils/server'
 
 const SignupPage = () => {
-    const handleSignup = (e: any) => {
+    const handleSignup = async (e: any) => {
       e.preventDefault()
-      
+
+          const res = await auth('/api/v1/signin/credentials', body)
+          const user = res.json()
+          if (res.ok && user ) return user
+          return null
     }
 
   const [password_, setPassword_] = useState('')
@@ -32,13 +36,21 @@ const SignupPage = () => {
   )
   
   const checkPasswords = (e: any) => {
-    setPassword_(e.target.value)
 
+    console.info('called')
     try {
-      passwords.safeParse({
+      const parsedP = passwords.safeParse({
         password: formData.password,
-        password_: e.target.value
+        password_: setPassword_(e.target.value)
       })
+      if (parsedP.success) {
+         // proceed to submitting form
+      } else {
+        // diplay error message
+      }
+
+
+
     } catch (e) {
       console.error(e)
       }
