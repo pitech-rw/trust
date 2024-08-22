@@ -17,6 +17,7 @@ const SignupPage = () => {
     }
 
   const [password_, setPassword_] = useState('')
+  const [formError, setFormError] = useState('')
   const [ formData, setFormData ] = useState({
       email: '',
       phone: '',
@@ -45,8 +46,10 @@ const SignupPage = () => {
       })
       if (parsedP.success) {
          // proceed to submitting form
+         setFormError('')
       } else {
         // diplay error message
+        setFormError("Passwords don't match")
       }
 
 
@@ -121,6 +124,11 @@ const SignupPage = () => {
           <button type="submit" className={styles.submitButton}>
             Register
           </button>
+          {
+            formError && <div className={formError ? `${styles.error} ${styles.active}`: styles.error}>
+              {formError}
+            </div>
+          }
         </form>
         </div>
         <Footer />

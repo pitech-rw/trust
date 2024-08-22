@@ -1,0 +1,11 @@
+.error {
+    color: red; /* or a color from your theme */
+    font-size: 12px;
+    margin-top: 4px;
+    display: none; /* Initially hidden */
+}
+
+/* Show the error message when there is an error */
+.error.active {
+    display: block;
+}
