@@ -1,10 +1,14 @@
 package pitech.trust.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pitech.trust.model.User;
 import pitech.trust.service.UserService;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -32,8 +36,14 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public ResponseEntity<?>  createUser( @Valid @RequestBody User user) {
+        try {
+
+            return  userService.saveUser(user);
+        } catch (DuplicateKeyException e) {
+            // Handle the case where the email already exists
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists");
+        }
     }
 
     @DeleteMapping("/{id}")
