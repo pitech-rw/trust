@@ -1,6 +1,8 @@
 package pitech.trust.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pitech.trust.model.User;
 import pitech.trust.repository.UserRepository;
@@ -27,8 +29,15 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public User saveUser(User user) {
-        return userRepository.save(user);
+    public ResponseEntity<?> saveUser(User user) {
+
+        if (userRepository.existsByEmail(user.getEmail())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists");
+        }
+        else{
+            User newUser = userRepository.save(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+        }
     }
 
     public void deleteUserById(String id) {
