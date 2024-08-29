@@ -3,9 +3,10 @@ import { CredentialInput } from 'next-auth/providers/credentials';
 
 dotenv.config()
 
-export const auth = async (endpoint: string, body: string) => {
+export const auth = async (endpoint: string, body: object) => {
     try {
-        const response = await fetch(`http://localhost:8080/${endpoint}`, 
+        debugger
+        const response = await fetch(`http://localhost:8080${endpoint}`, 
             {
                 method: 'POST',
                 body: JSON.stringify(body),

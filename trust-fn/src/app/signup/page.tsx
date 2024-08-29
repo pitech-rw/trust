@@ -10,8 +10,9 @@ const SignupPage = () => {
     const handleSignup = async (e: any) => {
       e.preventDefault()
 
-          const res = await auth('/api/v1/signin/credentials', body)
-          const user = res.json()
+          const res = await auth('/api/v1/users', formData)
+          const user = JSON.stringify(res)
+          console.info(user)
           if (res.ok && user ) return user
           return null
     }
@@ -61,6 +62,7 @@ const SignupPage = () => {
 
   const handleChange = (ev: { target: { name: any; value: any } }) => {
     const {name, value } = ev.target
+    console.info('name: ',  name, 'value', value)
     setFormData({
       ...formData,
       [name]: value
@@ -81,7 +83,7 @@ const SignupPage = () => {
             <label htmlFor="email">Email</label>
             <input
               type="email"
-              id="email"
+              name="email"
               placeholder={formData.email}
               onChange={handleChange}
               required
@@ -91,7 +93,7 @@ const SignupPage = () => {
             <label htmlFor="telephone">Phone number</label>
             <input
                 type="tel"
-                id="phone"
+                name="phone"
                 pattern="07[2389]\d{7}"                
                 placeholder={formData.phone}
                 onChange={handleChange}
@@ -103,7 +105,7 @@ const SignupPage = () => {
             <label htmlFor="password">Password</label>
             <input
               type="password"
-              id="password"
+              name="password"
               placeholder={formData.password}
               minLength={8}
               onChange={handleChange}
@@ -114,7 +116,7 @@ const SignupPage = () => {
             <label htmlFor='password_'>Re-type password</label>
             <input
                 type='password'
-                id='password_'
+                name='password_'
                 placeholder={password_}
                 minLength={8}
                 onChange={checkPasswords}
