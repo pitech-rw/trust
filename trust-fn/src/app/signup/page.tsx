@@ -5,8 +5,9 @@ import Footer from '../ui/footer/footer'
 import styles from '../auth/signin.module.css'
 import { z } from 'zod'
 import { auth } from '../utils/server'
-
+import { useNotification } from '../ui/shared/notification/notificationContext'
 const SignupPage = () => {
+  const { addNotification } = useNotification()
     const handleSignup = async (e: any) => {
       e.preventDefault()
 
@@ -50,6 +51,7 @@ const SignupPage = () => {
       } else {
         // diplay error message
         setFormError("Passwords don't match")
+        addNotification(formError, 'error')
         // show this error message for 5 seconds
         setTimeout(() => {
           setFormError('')
