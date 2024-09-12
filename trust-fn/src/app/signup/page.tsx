@@ -39,7 +39,6 @@ const SignupPage = () => {
   
   const checkPasswords = (e: any) => {
 
-    console.info('called')
     try {
       const parsedP = passwords.safeParse({
         password: formData.password,
@@ -51,6 +50,10 @@ const SignupPage = () => {
       } else {
         // diplay error message
         setFormError("Passwords don't match")
+        // show this error message for 5 seconds
+        setTimeout(() => {
+          setFormError('')
+        }, 10000)
       }
 
 
@@ -126,6 +129,7 @@ const SignupPage = () => {
           <button type="submit" className={styles.submitButton}>
             Register
           </button>
+
           {
             formError && <div className={formError ? `${styles.error} ${styles.active}`: styles.error}>
               {formError}

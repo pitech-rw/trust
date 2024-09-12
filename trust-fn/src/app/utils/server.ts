@@ -5,7 +5,9 @@ dotenv.config()
 
 export const auth = async (endpoint: string, body: object) => {
     try {
-        debugger
+        // replace localhost with .env variable
+        
+
         const response = await fetch(`http://localhost:8080${endpoint}`, 
             {
                 method: 'POST',
