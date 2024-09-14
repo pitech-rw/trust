@@ -35,16 +35,6 @@ public class UserController {
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ResponseEntity<?>  createUser( @Valid @RequestBody User user) {
-        try {
-
-            return  userService.saveUser(user);
-        } catch (DuplicateKeyException e) {
-            // Handle the case where the email already exists
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists");
-        }
-    }
 
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable String id) {

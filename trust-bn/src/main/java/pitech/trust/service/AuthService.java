@@ -1,55 +1,66 @@
 package pitech.trust.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pitech.trust.dto.LoginUserDto;
+import pitech.trust.dto.RegisterUserDto;
+import pitech.trust.exception.UserAlreadyExistsException;
 import pitech.trust.model.User;
 import pitech.trust.repository.UserRepository;
 
-import java.util.List;
-import java.util.Optional;
+
+@Service
+public class AuthService {
+    private final UserRepository userRepository;
+
+    private final PasswordEncoder passwordEncoder;
+
+    private final AuthenticationManager authenticationManager;
+
+    public AuthService(
+            UserRepository userRepository,
+            AuthenticationManager authenticationManager,
+            PasswordEncoder passwordEncoder
+    ) {
+        this.authenticationManager = authenticationManager;
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.core.OAuth2AccessToken;
-import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
-import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
-import org.springframework.stereotype.Service;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
+    public User authenticate(LoginUserDto input) {
 
-import java.util.HashSet;
-import java.util.Set;
+        try {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        input.getEmail(),
+                        input.getPassword()
+                )
+        );
 
 
-//@Service
-public class AuthService {//implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
-//
-//        @Override
-//        public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-//            // Use the OAuth2AccessToken to make requests to the OAuth2 provider's UserInfo endpoint
-//            OAuth2AccessToken accessToken = userRequest.getAccessToken();
-//
-//            // Example: Fetch user details from Google's UserInfo endpoint
-//            // Replace with your actual implementation to fetch user info from the provider
-//            String userInfoUri = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUri();
-//            // Use RestTemplate to make a request to the UserInfo endpoint and retrieve user attributes
-//            // Example:
-//        /*
-//        ResponseEntity<Map<String, Object>> response = restTemplate.exchange(userInfoUri, HttpMethod.GET,
-//            new HttpEntity<>(createHeaders(accessToken)),
-//            new ParameterizedTypeReference<Map<String, Object>>() {});
-//        Map<String, Object> userAttributes = response.getBody();
-//        */
-//
-//            // For demonstration, creating a mock OAuth2User object
-//            Set<GrantedAuthority> authorities = new HashSet<>();
-//            authorities.add(new OAuth2UserAuthority("ROLE_USER","Admin"));
-//            OAuth2User oauth2User = new DefaultOAuth2User(authorities, userAttributes, "sub");
-//
-//            return oauth2User;
-//        }
+        return userRepository.findByEmail(input.getEmail())
+                .orElseThrow();
+        } catch (Exception e) {
+            System.err.println("Authentication failed: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    public User signup(RegisterUserDto input) {
+        User user = new User();
+                user.setFirstName(input.getFirstName());
+                user.setEmail(input.getEmail());
+                user.setPassword(passwordEncoder.encode(input.getPassword()));
+
+                if(userRepository.existsByEmail(user.getEmail())){
+                    throw new UserAlreadyExistsException("User with email "+user.getEmail()+" already exists");
+                }
+        return userRepository.save(user);
+    }
     }
 
