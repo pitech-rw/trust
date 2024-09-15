@@ -1,6 +1,7 @@
 'use client'
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useCallback, useContext, useState } from 'react'
 import Notification from './notification'
+import { set } from 'zod'
 
 interface Notification {
     id: number,
@@ -10,26 +11,29 @@ interface Notification {
 
 interface NotificationContextProps {
     notifications: Notification[],
-    addNotification: (message: string, type: 'success' | 'error' | 'info') => void,
+    addNotification: (message: string, type: 'success' | 'error' | 'info', duration?: number) => number,
     removeNotification: (id: number) => void
 }
 
 const NotificationContext = createContext<NotificationContextProps | undefined>(undefined)
+const DEFAULT_DURATION=5000
 
 export const NotificationProvider: React.FC<{children: React.ReactNode }> = ({children}) => {
     const [notifications, setNotifications] = useState<Notification[]>([])
     let id = 0
 
-    let addNotification = (message: string, type: 'success' | 'info' | 'error') => {
-        setNotifications( prev => [
-            ...prev,
-            {
-                id: id++,
-                message,
-                type
-            }
-        ])
-    }
+    let addNotification = useCallback((message: string, type: 'success' | 'info' | 'error', duration=DEFAULT_DURATION ) => {
+        const newNotification = {
+            id: id++,
+            message,
+            type
+        }
+        setNotifications( prev => [ ...prev, newNotification ])
+        setTimeout(() => {
+            setNotifications(prev => prev.filter(n => n.id !== newNotification.id))
+        }, duration)
+        return id
+    }, [])
 
     let removeNotification = (id: number) => {
         setNotifications(prev => prev.filter(notification => notification.id !== id))

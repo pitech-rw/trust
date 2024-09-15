@@ -20,8 +20,6 @@ const Notification: React.FC<NotificationProps> = ({ message, type, onClose }) =
         case 'error':
             notificationClass = styles.error
             break
-        default:
-            notificationClass = ''
     }
 
     return (
