@@ -1,13 +1,12 @@
 'use client'
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useState, useEffect } from 'react'
 import Nav from '@/app/ui/top navbar/nav'
 import Footer from '../ui/footer/footer'
 import styles from '../auth/signin.module.css'
 import { z } from 'zod'
 import { auth } from '../utils/server'
-import { useNotification } from '../ui/shared/notification/notificationContext'
 const SignupPage = () => {
-  const { addNotification } = useNotification()
+  const [passwordMatch, setPasswordMatch] = useState(true) 
     const handleSignup = async (e: any) => {
       e.preventDefault()
 
@@ -18,7 +17,7 @@ const SignupPage = () => {
           return null
     }
 
-  const [password_, setPassword_] = useState('')
+  const [password_, setPassword_] = useState('x')
   const [formError, setFormError] = useState('')
   const [ formData, setFormData ] = useState({
       email: '',
@@ -39,35 +38,30 @@ const SignupPage = () => {
   )
   
   const checkPasswords = (e: any) => {
-
-    try {
+    const newP = e.target.value
+    setPassword_(newP)
+    useEffect(() => {
       const parsedP = passwords.safeParse({
         password: formData.password,
-        password_: setPassword_(e.target.value)
+        password_: newP
       })
       if (parsedP.success) {
-         // proceed to submitting form
-         setFormError('')
+        // proceed to submitting form
+        setFormError('')
+        setPasswordMatch(true)
       } else {
         // diplay error message
         setFormError("Passwords don't match")
-        addNotification(formError, 'error')
-        // show this error message for 5 seconds
-        setTimeout(() => {
-          setFormError('')
-        }, 10000)
+        setPasswordMatch(false)
+        
       }
 
 
-
-    } catch (e) {
-      console.error(e)
-      }
+      }, [formData.password, password_])
   }
 
   const handleChange = (ev: { target: { name: any; value: any } }) => {
     const {name, value } = ev.target
-    console.info('name: ',  name, 'value', value)
     setFormData({
       ...formData,
       [name]: value
@@ -128,7 +122,7 @@ const SignupPage = () => {
                 required
             />
             </div>
-          <button type="submit" className={styles.submitButton}>
+          <button type="submit" className={styles.submitButton} disabled={!passwordMatch}>
             Register
           </button>
 

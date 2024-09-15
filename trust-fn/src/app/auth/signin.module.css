@@ -95,7 +95,12 @@
 }
 
 .submitButton:hover {
-  background-color: #357ebd; /* Darker shade of primary color */
+  background-color: #114E57
+}
+
+.submitButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .divider {
