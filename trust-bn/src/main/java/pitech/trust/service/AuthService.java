@@ -2,6 +2,7 @@ package pitech.trust.service;
 
 
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -51,16 +52,21 @@ public class AuthService {
         }
     }
 
-    public User signup(RegisterUserDto input) {
+    public boolean signup(RegisterUserDto input) {
         User user = new User();
-                user.setFirstName(input.getFirstName());
                 user.setEmail(input.getEmail());
+                user.setPhoneNumber(input.getPhoneNumber());
+                user.setUsername(input.getUserName());
                 user.setPassword(passwordEncoder.encode(input.getPassword()));
+
 
                 if(userRepository.existsByEmail(user.getEmail())){
                     throw new UserAlreadyExistsException("User with email "+user.getEmail()+" already exists");
                 }
-        return userRepository.save(user);
+        User newUser =  userRepository.save(user);
+                System.out.println("The new user issssssssssssssssss "+ newUser.getEmail());
+        return  true;
+
     }
     }
 

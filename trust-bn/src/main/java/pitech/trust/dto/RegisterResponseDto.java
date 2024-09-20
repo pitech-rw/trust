@@ -4,6 +4,9 @@ import lombok.Data;
 import pitech.trust.model.User;
 @Data
 public class RegisterResponseDto {
-    User user;
-    String response;
+    private String email;
+    private String userName;
+    private String phoneNumber;
+    private String message;
+
 }
